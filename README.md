@@ -35,9 +35,12 @@ Important files:
 
 * edu.iastate.cs.boa - /src/edu/iastate/cs/boa/Boa.xtext (the grammar file)
 * edu.iastate.cs.boa - /src/edu/iastate/cs/boa/GenerateBoa.mwe2 (the modeling engine workflow file)
+* edu.iastate.cs.boa.ui - /lib/boa-compiler.jar (the boa language compiler)
 
 If you modify the input grammar (Boa.xtext) or modeling engine workflow file
-(GenerateBoa.mwe2) you must rebuild!
+(GenerateBoa.mwe2) you must rebuild! 
+
+The corresponding compiler (boa-compiler.jar) must be updated for modifying the input grammar.
 
 
 ## Re-generating Files ##
@@ -73,8 +76,10 @@ you would any other Java application.
 
 ## Exporting ##
 
-Before exporting, make sure to bump the version in *both* manifest files and
-the feature.xml file.
+Before exporting: 
+1. Make sure to bump the version in *both* manifest files and the feature.xml file.
+1. In the Category.xml, select the boa category => delete the previous feature 
+=> add Feature (locate the .sdk and add it)
 
 In order to properly export the IDE to an Eclipse update site, you need to have
 Eclipse PDE installed:
@@ -89,14 +94,14 @@ Then follow these steps:
 1. select the www directory
 1. make sure 'Package as individual JAR archives' is checked
 1. make sure 'Generate p2 repository' is checked
-1. 'Categorize repository' with a path selecting www/category.xml
+1. 'Categorize repository' with a path selecting .sdk/category.xml
 1. hit Finish
 
 After this, the www directory contains the exported project.  You need to
 update a few files manually:
 
 1. edit www/site.xml to bump the version
-1. edit www/category.xml to bump the version
+1. replace www/category.xml with .sdk/category.xml
 
 Then git add/commit/push all changed files in the www directory, and git pull
 the updates to the webserver.
